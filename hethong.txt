@@ -1,0 +1,50 @@
+ Tầng thiết bị (Device Layer)
+Bao gồm cảm biến, actuator và vi điều khiển (ESP32).
+Nhiệm vụ:
+Thu thập dữ liệu cảm biến.
+Điều khiển actuator.
+Xử lý thời gian thực bằng FreeRTOS + lập lịch ưu tiên cố định.
+Gửi dữ liệu lên tầng mạng qua MQTT/TLS.
+2. Tầng mạng & truyền thông (Network Layer)
+Bao gồm Wi-Fi, MQTT broker, TLS.
+Nhiệm vụ:
+Nhận dữ liệu từ ESP32.
+Thực thi ACL, bảo mật, QoS 1/2.
+Đảm bảo dữ liệu đến tầng ứng dụng một cách tin cậy.
+3. Tầng ứng dụng / xử lý dữ liệu (Application Layer)
+Bao gồm server, database, dashboard, phân tích dữ liệu.
+Nhiệm vụ:
+Lưu trữ và xử lý dữ liệu từ thiết bị.
+Hiển thị thông tin và cảnh báo.
+Ra quyết định điều khiển ngược lại tầng thiết bị nếu cần.
+1.Tầng thiết bị (Device Layer)
+Tầng thiết bị là tầng cơ sở của hệ thống, chịu trách nhiệm trực tiếp với các cảm biến, actuator và vi điều khiển. Nó bao gồm các thành phần chính:
+Cảm biến (Sensors): Cảm biến tia lửa hồng ngoại (IR Flame Sensor), khói, khí gas,… cung cấp dữ liệu thô cho hệ thống.
+Thiết bị điều khiển (Actuators): còi, đèn báo, relay, van,… thực hiện các hành động theo yêu cầu.
+Vi điều khiển (MCU): ESP32 đảm nhận xử lý dữ liệu cảm biến, điều khiển actuator và giao tiếp với tầng ứng dụng.
+Giao tiếp mạng: ESP32 kết nối Wi-Fi và gửi dữ liệu lên tầng mạng qua MQTT, hỗ trợ TLS để bảo mật.
+Nguồn và quản lý năng lượng: bảo đảm ESP32 và các module hoạt động ổn định, tối ưu điện năng cho các node pin.
+Tầng thiết bị chịu trách nhiệm thu thập dữ liệu, xử lý sơ bộ, điều khiển thiết bị và giao tiếp với tầng mạng, đồng thời phải đáp ứng yêu cầu thời gian thực để xử lý các sự kiện quan trọng cảnh báo cháy
+1. Phân chia tác vụ trong tầng thiết bị
+Ví dụ cấu trúc các task FreeRTOS trên ESP32:
+Task
+Chu kỳ
+Ưu tiên
+Chức năng
+Sensor Task
+500ms-1s
+Cao
+Đọc dữ liệu từ các cảm biến (khói, nhiệt, IR flame), chuẩn hóa và lưu trạng thái.
+Warning Task
+Ngay khi có sự kiện
+Cao
+Kiểm tra dữ liệu sensor, phát hiện cháy, kích hoạt còi/LED, gửi cảnh báo nội bộ.
+MQTT Task
+5–10 s
+Trung bình
+Gửi trạng thái cảm biến, trạng thái actuator và cảnh báo lên tầng mạng qua MQTT/TLS.
+Telemetry / Logging Task
+30 s–1 phút
+Thấp
+Ghi log dữ liệu cảm biến, tổng hợp số liệu, hiệu chỉnh cảm biến, bảo trì định kỳ.
+

@@ -1,0 +1,26 @@
+# Build output
+/build/
+CMakeCache.txt
+CMakeFiles/
+Makefile
+cmake_install.cmake
+compile_commands.json
+sdkconfig.old
+
+# ESP-IDF SDK & toolchain
+/esp-idf/
+
+# Eclipse / VSCode / CLion
+/.vscode/
+/.idea/
+/*.iml
+
+# Python
+*.pyc
+__pycache__/
+
+# Logs
+*.log
+
+# Environment variables
+.env
