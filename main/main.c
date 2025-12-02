@@ -14,10 +14,10 @@
 static const char *TAG = "MAIN";
 
 // Cấu hình hệ thống
-#define WIFI_SSID "Duong"
-#define WIFI_PASSWORD "12345678"
+#define WIFI_SSID "DươngNV"
+#define WIFI_PASSWORD "21062003"
 
-#define MQTT_BROKER_URI "mqtt://broker.example.com"  // Hoặc mqtts:// cho TLS
+#define MQTT_BROKER_URI "mqtt://192.168.0.3"  // Hoặc mqtts:// cho TLS
 #define MQTT_USERNAME NULL  // Hoặc "username" nếu cần
 #define MQTT_PASSWORD NULL  // Hoặc "password" nếu cần
 #define MQTT_CLIENT_ID "fire_system_esp32"
