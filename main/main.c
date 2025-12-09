@@ -17,11 +17,11 @@ static const char *TAG = "MAIN";
 #define WIFI_SSID "DươngNV"
 #define WIFI_PASSWORD "21062003"
 
-#define MQTT_BROKER_URI "mqtt://192.168.0.3"  // Hoặc mqtts:// cho TLS
-#define MQTT_USERNAME NULL  // Hoặc "username" nếu cần
-#define MQTT_PASSWORD NULL  // Hoặc "password" nếu cần
+#define MQTT_BROKER_URI "mqtts://2800b62043be42bc94cb422b60d069f2.s1.eu.hivemq.cloud:8883"  // Hoặc mqtts:// cho TLS
+#define MQTT_USERNAME "duongnv"  // Hoặc "username" nếu cần
+#define MQTT_PASSWORD "Rts12345"  // Hoặc "password" nếu cần
 #define MQTT_CLIENT_ID "fire_system_esp32"
-#define MQTT_USE_TLS false
+#define MQTT_USE_TLS true
 
 #define BUZZER_GPIO_PIN GPIO_NUM_25  // Thay đổi theo GPIO bạn sử dụng
 
